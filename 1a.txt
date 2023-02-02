@@ -1,0 +1,42 @@
+import java.util.*;
+class Student
+{
+String name,usn,branch,phno;
+void read()
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter the name");
+name=sc.next();
+System.out.println("Enter the usn");
+usn=sc.next();
+System.out.println("Enter the branch");
+branch=sc.next();
+System.out.println("Enter the phno");
+phno=sc.next();
+}
+void display()
+{
+System.out.println(name+" "+usn+" "+branch+" "+phno);
+}
+}
+public class StudentDemo
+{
+public static void main(String[] args)
+{
+int n;
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter the number of students");
+n=sc.nextInt();
+System.out.println(n);
+Student[] s1=new Student[n];
+for(int i=0;i<n;i++)
+s1[i]=new Student();
+for(int i=1;i<=n;i++)
+{
+System.out.println("Enter the student"+i+"details");
+s1[i].read();
+}
+System.out.println("student details of "+n+" sudents are as follows");
+for(int i=1;i<=n;i++)
+s1[i].display();
+}}

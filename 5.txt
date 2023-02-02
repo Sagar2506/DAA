@@ -1,0 +1,75 @@
+import java.util.*;
+import java.io.*;
+public class Sagar
+{
+static int size,a[];
+public static void main(String[] args)throws IOException
+{
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter the number of elements to sorted: ( >5000):");
+size = scanner.nextInt();
+a = new int [size];
+getRandomNumbers(a);
+long startTime = System.nanoTime();
+Sagar mm = new Sagar();
+mm.mergesort(0,size-1);
+long estimatedTime = System.nanoTime() - startTime;
+PrintWriter outA = new PrintWriter(new File("msort.txt"));
+for(int i:a)
+{
+    outA.print(i);
+outA.print(" ");
+}
+outA.close();
+System.out.println();
+System.out.println("The time complexity is " + (estimatedTime/1000000000.0)+ "secs");
+}
+public static void getRandomNumbers(int[] a)throws IOException
+{
+Random rand = new Random();
+int number, count=0;
+PrintWriter out = new PrintWriter(new File("Mrandom.txt"));
+while(count<size)
+{
+number=rand.nextInt(size)+1;
+a[count]=number;
+out.print(number);
+out.print(" ");
+count++;
+}
+out.close();
+System.out.println("The total numbers generated: " + count );
+}
+void mergesort(int low,int high)
+{
+int mid;
+if(low<high)
+{
+mid=(low+high)/2;
+mergesort(low,mid);
+mergesort(mid+1,high);
+merge(low,mid,high);
+}
+}
+void merge(int low,int mid,int high)
+{
+int i,j,k,b[],h;
+b=new int[size];
+h=i=low;
+j=mid+1;
+while(h<=mid&&j<=high)
+if(a[h]<a[j])
+b[i++]=a[h++];
+
+else
+b[i++]=a[j++];
+if(h>mid)
+for(k=j;k<=high;k++)
+b[i++]=a[k];
+else
+for(k=h;k<=mid;k++)
+b[i++]=a[k];
+for(k=low;k<=high;k++)
+a[k]=b[k];
+}
+}

@@ -1,0 +1,80 @@
+
+import java.util.*;
+public class Sagar
+{
+static int c,n,i,j,item;
+static double total,ratio[],p[],w[],x[];
+int getnext()
+{
+double h=0;
+int index=-1;
+for(i=0;i<p.length;++i)
+{
+if(ratio[i]>h)
+{
+h=ratio[i];
+index=i;
+}
+}
+return index;
+}
+public static void main(String args[])
+{
+Sagar a=new Sagar();
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter the number of objects");
+n=sc.nextInt();
+System.out.println("Enter the knapsack capacity");
+c=sc.nextInt();
+p=new double[n];
+w=new double[n];
+System.out.println("Enter the Weights of objects");
+for(i=0;i<n;i++)
+w[i]=sc.nextInt();
+System.out.println("Enter the profits of objects");
+for(i=0;i<n;i++)
+p[i]=sc.nextInt();
+ratio=new double[n];
+x=new double[n];
+for(i=0;i<n;i++)
+ratio[i]=(p[i]/w[i]);
+item=new Sagar().getnext();
+while(c>w[item])
+{
+total+=p[item];
+c=c-w[item];
+ratio[item]=0;
+x[item]=1.0;
+item=new Sagar().getnext();
+}
+x[item]=c/w[item];
+System.out.println("The fraction part of objct selected in knapsack:");
+for(i=0;i<n;i++)
+System.out.println(x[i]);
+total+=x[item]*p[item];
+System.out.println("The toal profit of knapsack is:"+total);
+}
+}
+
+
+
+Enter the number of objects
+4
+Enter the knapsack capacity
+5
+Enter the Weights of objects
+2
+1
+3
+2
+Enter the profits of objects
+12
+10
+20
+15
+The fraction part of objct selected in knapsack:
+0.0
+1.0
+0.6666666666666666
+1.0
+The toal profit of knapsack is:38.33333333333333

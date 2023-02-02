@@ -1,0 +1,68 @@
+import java.util.*;
+public class Kruskal {
+static int mst[][],n,total=0,i,j,u,v,edges=0,parent[],cost[][];
+void kruskal(int cost[][],int n,int mst[][])
+{
+ parent=new int[n];
+ int min=999;
+ for(i=0;i<n;i++)
+ for(j=0;j<n;j++)
+ if ((j>i) && (cost[i][j] != 999)) edges++;
+ for(i=0;i<n;i++) parent[i]=i;
+ while (edges != 0)
+ {
+ for(i=0;i<n;i++)
+ for(j=0;j<n;j++)
+ if ((j>i) && (cost[i][j] < min))
+ {
+min=cost[i][j];
+u=i;v=j;
+ }
+ i=parent[u];
+ j=parent[v];
+ if (i != j)
+ {
+mst[u][v]=mst[v][u]=cost[u][v];
+if (i<j)
+{
+for(int k=0;k<n;k++)
+if (parent[k] == j) parent[k]=i;
+}
+else
+{
+for(int k=0;k<n;k++)
+if (parent[k] == i) parent[k]=j;
+ }
+ }
+ cost[u][v]=cost[v][u]=999;
+ edges--;
+ min=999;
+ }
+}
+public static void main(String[] args)
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter the number of vertices");
+n=sc.nextInt();
+System.out.println("Enter the matrix");
+cost=new int[n][n];
+mst=new int[n][n];
+for(i=0;i<n;i++)
+for(j=0;j<n;j++)
+cost[i][j]=sc.nextInt();
+new Kruskal().kruskal(cost,n,mst);
+for(i=0;i<n;i++)
+{
+for(j=0;j<n;j++)
+{
+if((j>i)&&(mst[i][j]!=0))
+{
+System.out.println(i+" "+j);
+total=total+mst[i][j];
+}
+}
+}
+System.out.println("total mst is "+total);
+}
+}
+

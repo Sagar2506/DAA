@@ -1,0 +1,86 @@
+
+import java.util.*;
+import java.io.*;
+
+/**
+ *
+ * @author Silvershades
+ */
+public class sagar
+{
+static int size, inputArr[];
+public static void main(String[] args)throws IOException {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter the number of elements to sorted: ( >5000):");
+size = scanner.nextInt();
+sagar qsort = new sagar();
+inputArr = new int [size];
+getRandomNumbers(inputArr);
+long startTime = System.nanoTime();
+qsort.quicksort(0,size-1);
+long estimatedTime = System.nanoTime() - startTime;
+PrintWriter outA = new PrintWriter(new File("qsort.txt"));
+for(int i:inputArr){
+outA.print(i);
+outA.print(" ");
+}
+outA.close();
+System.out.println();
+System.out.println("The time complexity is " + (estimatedTime/1000000000.0)+ " secs");
+}
+static void getRandomNumbers(int[] inputArr)throws IOException{
+Random rand = new Random();
+int number, count=0;
+PrintWriter out = new PrintWriter(new File("Qrandom.txt"));
+while(count<size){
+number=rand.nextInt(size)+1;
+out.print(number);
+out.print(" ");
+inputArr[count]=number;
+count++;
+}
+out.close();
+System.out.println("The total numbers generated: " + count );
+}
+int partition(int l,int r)
+{
+int p,i,j;
+p=inputArr[l];
+i=l;j=r+1;
+while(i<j)
+{
+for(i=i+1;i<r&&inputArr[i]<p;i++);
+for(j=j-1;j>l&&inputArr[j]>p;j--);
+swap(i,j);
+}
+swap(i,j);
+swap(l,j);
+return j;
+}
+void quicksort(int l, int r) {
+int s,i;
+if(l<r)
+{
+s=partition(l,r);
+quicksort(l,s-1);
+quicksort(s+1,r);
+}
+}
+void swap(int i, int j) {
+int temp = inputArr[i];
+inputArr[i] = inputArr[j];
+inputArr[j] = temp;
+}
+}
+
+
+
+
+
+
+
+
+
+Enter the number of elements to sorted: ( >5000):5000
+The total numbers generated: 5000
+The time complexity is 0.001899673 secs

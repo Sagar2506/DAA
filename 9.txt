@@ -1,0 +1,54 @@
+import java.util.*;
+public class Prim {
+static int mst[][],n,total=0,i,j,u,v,cost[][],visited[];
+void prim(int coat[][],int n,int mst[][])
+{
+int vertices=0,min=999;
+visited=new int[n];
+Arrays.fill(visited,0);
+visited[0]=1;
+vertices++;
+while(vertices<n)
+{
+for(i=0;i<n;i++)
+for(j=0;j<n;j++)
+{
+if((visited[i]==1)&&(visited[j]!=1)&&cost[i][j]<min)
+{
+min=cost[i][j];
+u=i;
+v=j;
+}
+}
+visited[v]=1;
+vertices++;
+mst[u][v]=mst[v][u]=min;
+min=999;
+}
+}
+public static void main(String[] args)
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter the number of vertices");
+n=sc.nextInt();
+System.out.println("Enter the matrix");
+cost=new int[n][n];
+mst=new int[n][n];
+for(i=0;i<n;i++)
+for(j=0;j<n;j++)
+cost[i][j]=sc.nextInt();
+new Prim().prim(cost,n,mst);
+for(i=0;i<n;i++)
+{
+for(j=0;j<n;j++)
+{
+if((j>i)&&(mst[i][j]!=0))
+{
+System.out.println(i+" "+j);
+total=total+mst[i][j];
+}
+}
+}
+System.out.println("total mst is "+total);
+}
+}

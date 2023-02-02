@@ -1,0 +1,41 @@
+import java.util.*;
+public class 3a
+{
+public static void main(String[] args)
+{
+int a,b;
+float res;
+try
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("Input Dividend (a) \n");
+a=sc.nextInt();
+System.out.println("Input Divisor (b) \n");
+b=sc.nextInt();
+if(b==0) throw new java.lang.ArithmeticException("Division by zero");
+res=(float)a/b;
+System.out.println("Quotient is="+res);
+}
+catch(ArithmeticException e)
+{
+System.out.println("Exception:"+e);
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+Input Dividend (a): 10
+Input Divisor (b): 5
+Quotient is : 2
+Input Dividend (a): 10
+Input Divisor (b): 0
+Exception

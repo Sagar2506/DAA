@@ -1,0 +1,47 @@
+import java.util.*;
+class customer {
+private String name,date_of_birth;
+public void read()
+{
+Scanner s=new Scanner(System.in);
+System.out.println("enter the name and date of birth");
+String n=s.nextLine();
+String[] ar=n.split(",");
+name=ar[0];
+date_of_birth=ar[1];
+}
+public void display()
+{
+System.out.print("name and Date of birth is:");
+System.out.print(name+",");
+StringTokenizer st=new StringTokenizer(date_of_birth,"/");
+int n=st.countTokens();
+for(int i=1;i<n;i++)
+System.out.print(st.nextToken()+",");
+System.out.print(st.nextToken());
+System.out.println();
+}
+}
+public class Pgm2b
+{
+public static void main(String[] args)
+{
+customer st=new customer();
+st.read();
+st.display();
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Name and Date of Birth is
+Xxxx,12,12,2000
